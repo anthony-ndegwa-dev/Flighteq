@@ -1,0 +1,74 @@
+section{
+    background-color: rgba(250, 247, 247, 1) !important;
+}
+
+input, textarea{
+    outline: none;
+    border: 1px solid #dbdfe2;
+    color: #343a3f;
+    border-radius: 6px;
+    height: 56px;
+    width: 100%;
+    font-size: 20px;
+    padding: 10px !important;
+}
+
+input:focus, textarea:focus{
+    box-shadow: 0px 2px 8px rgb(244 38 62 / 4%), 0px 1px 3px rgb(31 37 89 / 7%);
+    border: 1.5px solid rgb(220,53,69);
+    transition-property: border-width;
+    transition-duration: 100ms;
+}
+
+textarea{
+    font-size: larger;
+    height: 150px;
+    width: 100%;
+}
+
+button{
+    font-size: medium;
+    width: auto;
+    height: auto;
+    padding: 7px 13px 7px 13px !important;
+}
+
+.top-left-section{
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+}
+
+.bbc{
+    padding: 20px 30px 20px 5px;
+}
+
+.row-fluid{
+    margin: 16px 0px;
+}
+
+.row-fluid a{
+    color: rgb(31 37 89 / 90%)!important;
+}
+
+
+.navbar{
+    margin: 0;
+    background-image: linear-gradient(to right, #ffcc70 18%, #4158d0 100%, #ffcc70 130%);
+    transition-duration: .2s;
+    border-bottom: 1px solid #fff;
+}
+.nav-link:hover{
+    color: #009!important;
+    text-decoration: underline #009;
+    transition-duration: .2s;
+}
+nav h1 {
+    color: #009;
+    font-size: 26px;
+    margin-top: 3px;
+}
+
+h1 {
+    color: #008;
+}

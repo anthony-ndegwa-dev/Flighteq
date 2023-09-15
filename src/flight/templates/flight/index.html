@@ -1,0 +1,134 @@
+{% extends 'flight/base.html' %}
+
+{% load static %}
+
+{% block head %}
+    <title>Home</title>
+    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+{% endblock head %}
+
+{% block body %}
+    <section class="section first-section" style="background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url('{% static 'img/plane.jpg'%}');">
+        <div class="banner-div">
+            <div class="banner">
+            <h1 class="banner-text">Book Tickets</h1>
+            <h2 class="banner-text2">Domestic and International Flight</h2>
+            </div>
+        </div>
+        <div class="search-flight">
+            <div class="container">
+            <form class="search-flight-form" action="{% url 'flight' %}" onsubmit="return flight_search()">
+                <div class="align-items-center">
+                    <div class="search-flight-form-data">
+                        <div class="input-row" style="display: flex;">
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                            <input type="radio" class="form-check-input trip-type" id="one-way" name="TripType" value="1" checked>One-way
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                            <input type="radio" class="form-check-input trip-type" id="round-trip" name="TripType" value="2" {% if trip_type == '2' %}checked{% endif %}>Round Trip
+                            </label>
+                        </div>
+                        </div>
+                        <div class="input-row">
+                            <label for="flight-from">From: </label>
+                            <input type="text" name="Origin" placeholder="From" id="flight-from" class="form-control mr-sm-3" onblur="hideplaces(this)" data-value="{{origin | lower}}" data-list="places_from" autocomplete="off" value="{{origin | upper}}">  <!--list="places_from"-->
+                            <div id="places_from" class="places_box">
+                            	<div class="each_places_to_list places__list" data-value="nbo" onclick="selectplace(this)">Nairobi (Kenya)</div>
+                            	<div class="each_places_to_list places__list" data-value="ebb" onclick="selectplace(this)">Kampala (Uganda)</div>
+                            	<div class="each_places_to_list places__list" data-value="dod" onclick="selectplace(this)">Dodoma (Tanzania)</div>
+                            	<div class="each_places_to_list places__list" data-value="krt" onclick="selectplace(this)">Khartoum (Sudan)</div>
+                            	<div class="each_places_to_list places__list" data-value="som" onclick="selectplace(this)">Mogadishu (Somalia)</div>
+                            	<div class="each_places_to_list places__list" data-value="add" onclick="selectplace(this)">Addis Ababa (Ethiopia)</div>
+                            	<div class="each_places_to_list places__list" data-value="jnb" onclick="selectplace(this)">Johannesburg (South Africa)</div>
+                            </div>
+                        </div>
+                        <div class="input-row">
+                            <label for="flight_to">To: </label>
+                            <input type="text" name="Destination" placeholder="To" id="flight-to" class="form-control mr-sm-3" onblur="hideplaces(this)" data-value="{{destination | lower}}" data-list="places_to" autocomplete="off" value="{{destination | upper}}">
+                            <div id="places_to" class="places_box">
+                            	<div class="each_places_to_list places__list" data-value="nbo" onclick="selectplace(this)">Nairobi (Kenya)</div>
+                            	<div class="each_places_to_list places__list" data-value="ebb" onclick="selectplace(this)">Kampala (Uganda)</div>
+                            	<div class="each_places_to_list places__list" data-value="dod" onclick="selectplace(this)">Dodoma (Tanzania)</div>
+                            	<div class="each_places_to_list places__list" data-value="krt" onclick="selectplace(this)">Khartoum (Sudan)</div>
+                            	<div class="each_places_to_list places__list" data-value="som" onclick="selectplace(this)">Mogadishu (Somalia)</div>
+                            	<div class="each_places_to_list places__list" data-value="add" onclick="selectplace(this)">Addis Ababa (Ethiopia)</div>
+                            	<div class="each_places_to_list places__list" data-value="jnb" onclick="selectplace(this)">Johannesburg (South Africa)</div>
+                            </div>
+                        </div>
+                        <div class="input-row">
+                            <label for="depart_date">Departure Date: </label>
+                            <input type="date" name="DepartDate" min="{{min_date}}" max="{{max_date}}" id="depart_date" placeholder="Date" class="form-control mr-sm-2" value="{{depart_date}}">
+                        </div>
+                        <div class="input-row">
+                            <label for="return_date">Return Date: </label>
+                            <input type="date" name="ReturnDate" min="{{min_date}}" max="{{max_date}}" id="return_date" placeholder="Date" class="form-control mr-sm-2" value="{{return_date}}" {% if trip_type != '2' %} disabled {% endif %}>
+                        </div>
+                        <div class="input-row">
+                            <label for="seat_class">Class: </label>
+                            <select name="SeatClass" id="SeatType" class="form-control mr-sm-2 selectpicker">
+                                <option value="economy" {% if seat == 'economy' %}selected{% endif %}>Economy</option>
+                                <option value="business" {% if seat == 'business' %}selected{% endif %}>Business</option>
+                                <option value="first" {% if seat == 'first' %}selected{% endif %}>First</option>
+                            </select>
+                        </div>
+                        <div class="input-row">
+                            <button type="submit" class="btn btn-search">Search Flight</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- info panel -->
+    <section class="rowi">
+      <div class="row justify-content-center">
+        <div class="col-10 info-panel">
+          <div class="row">
+            <div class="col-sm">
+              <img src="{% static 'img/staff.png' %}" class="img-fluid float-left" alt="staff">
+              <h4>Book Flight</h4>
+              <p>We operate 24 hours a day to guarantee an exceptional and unforgettable flight experience for you.</p>
+            </div>
+            <div class="col-lg">
+              <img src="{% static 'img/tfavicon.jpg' %}" alt="HiRes" class="img-fluid float-left">
+              <h4>Your Tickets</h4>
+              <p>You can retrieve all your past flight tickets from <b>My Tickets</b></p>
+            </div>
+            <div class="col-lg">
+              <img src="{% static 'img/security.png' %}" alt="Security" class="img-fluid float-left" alt="security">
+              <h4>Security</h4>
+              <p>We safeguard your data by storing it in a highly secure environment.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+
+      <div class="row workingspace">
+        <div class="col-lg-6 tiext">
+            <h2>We Connect You To Your Destination.</h2>
+            <p>We take pride in bridging the gap between your wanderlust and your dream destination. Our commitment is to make travel not just a journey but an unforgettable experience. With our user-friendly platform and a vast network of travel options, we simplify the process of connecting you to the world's most exciting places. Whether it's a relaxing getaway, a thrilling adventure, or a cultural exploration, we're here to turn your travel dreams into reality. Let us be your trusted partner in every step of your journey</p>
+        </div>
+        <div class="col-lg-5">
+            <img src="{% static 'img/flyhigh.webp' %}" class="img-fluid" alt="flight">
+        </div>
+      </div>  
+
+      <div class="row workingspace">
+        <div class="col-lg-6">
+            <img src="{% static 'img/passanger.png' %}" class="img-fluid" alt="passanger">
+        </div>
+        <div class="col-lg-5">
+          <h2>Seamless Flight Booking Anywhere, Anytime</h2>
+          <hr></hr>
+          <p>We streamline the flight booking process for your convenience and enjoyment. After creating an account and logging in, you can book flights from anywhere with ease.</p>
+          <hr></hr>
+          <a href="#" class="btn btn-search">Book Now</a>
+        </div>
+      </div>
+{% endblock%}
