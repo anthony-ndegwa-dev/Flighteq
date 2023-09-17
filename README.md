@@ -8,3 +8,7 @@ Flighteq is a comprehensive flight booking system that simplifies the process of
 * Framework - Django
 
 ![Flighteq](https://github.com/anthony-ndegwa-dev/Flighteq/blob/main/src/flight/static/img/flighteq-page.png)
+
+[Video Demo](https://drive.google.com/file/d/1AveP4NTOzxu5DeFLFeIqq3pb-iFAoNA5/view?usp=sharing)
+
+[Deployed](ndegwa.pythonanywhere.com)
