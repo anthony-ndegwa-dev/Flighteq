@@ -11,4 +11,4 @@ Flighteq is a comprehensive flight booking system that simplifies the process of
 
 [Video Demo](https://drive.google.com/file/d/1AveP4NTOzxu5DeFLFeIqq3pb-iFAoNA5/view?usp=sharing)
 
-[Deployed](ndegwa.pythonanywhere.com)
+[Deployed](https://ndegwa.pythonanywhere.com)
